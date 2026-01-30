@@ -19,7 +19,7 @@ FROM base AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV HOSTNAME=0.0.0.0
-ENV PORT=3000
+ENV PORT=3026
 
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
@@ -36,6 +36,6 @@ COPY --from=deps /app/node_modules/file-uri-to-path ./node_modules/file-uri-to-p
 RUN mkdir -p /app/data && chown nextjs:nodejs /app/data
 
 USER nextjs
-EXPOSE 3000
+EXPOSE 3026
 
 CMD ["node", "server.js"]

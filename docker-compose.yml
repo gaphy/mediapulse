@@ -2,7 +2,7 @@ services:
   mediapulse:
     build: .
     ports:
-      - "3000:3000"
+      - "3026:3026"
     volumes:
       - mediapulse-data:/app/data
     environment:
