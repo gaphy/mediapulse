@@ -28,12 +28,10 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Copy better-sqlite3 native binding
+# Copy better-sqlite3 native binding and its runtime dependencies
 COPY --from=deps /app/node_modules/better-sqlite3 ./node_modules/better-sqlite3
 COPY --from=deps /app/node_modules/bindings ./node_modules/bindings
 COPY --from=deps /app/node_modules/file-uri-to-path ./node_modules/file-uri-to-path
-COPY --from=deps /app/node_modules/prebuild-install ./node_modules/prebuild-install
-COPY --from=deps /app/node_modules/node-gyp-build ./node_modules/node-gyp-build
 
 RUN mkdir -p /app/data && chown nextjs:nodejs /app/data
 
