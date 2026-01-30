@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MediaPulse
 
-## Getting Started
+A self-hosted dashboard for monitoring your media server stack at a glance. Track the health, key metrics, and activity of Sonarr, Radarr, Plex, Jellyfin, and more from a single page with auto-refresh.
 
-First, run the development server:
+## Supported Apps
+
+| App | Metrics |
+|-----|---------|
+| **Sonarr** | Series count, queue, missing episodes, disk usage |
+| **Radarr** | Movie count, queue, missing movies, disk usage |
+| **Prowlarr** | Indexer count, failed indexers |
+| **Bazarr** | Missing subtitles (TV + movies) |
+| **Plex** | Libraries, active streams |
+| **Jellyfin** | Libraries, active sessions, update status |
+| **Immich** | Photos, videos, storage used |
+| **Overseerr** | Pending requests, requested, available, partially available |
+| **Pinchflat** | Response time |
+| **qBittorrent** | Download/upload speed, active downloads |
+
+## Quick Start (Docker)
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Generate an encryption key
+export ENCRYPTION_KEY=$(openssl rand -hex 32)
+
+# Start the container
+docker compose up -d
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) and go to **Settings** to add your apps.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Manual Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Requires Node.js 22+.
 
-## Learn More
+```bash
+# Install dependencies
+npm install
 
-To learn more about Next.js, take a look at the following resources:
+# Generate an encryption key and add it to .env.local
+echo "ENCRYPTION_KEY=$(openssl rand -hex 32)" > .env.local
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Start the dev server
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+For production:
 
-## Deploy on Vercel
+```bash
+npm run build
+npm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Environment Variables
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `ENCRYPTION_KEY` | Yes | 32-byte hex string for AES-256-GCM encryption of stored API keys and passwords. Generate with `openssl rand -hex 32`. |
+
+## Config Export / Import
+
+You can export and import your app configuration from the **Settings** page using the Export and Import buttons. The exported JSON file contains all app configs including credentials in plaintext, so store it securely.
+
+This is useful for backing up your configuration or migrating to a new installation.
+
+## Architecture
+
+- **Next.js 15** (App Router) with React 19 and TypeScript
+- **Tailwind CSS v4** with shadcn/ui components
+- **better-sqlite3** for config storage (credentials encrypted at rest with AES-256-GCM)
+- **SWR** for client-side polling (30-second auto-refresh)
+- All external API calls happen server-side (API keys never reach the browser)
+
+## License
+
+MIT
