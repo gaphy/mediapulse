@@ -8,26 +8,32 @@ A self-hosted dashboard for monitoring your media server stack at a glance. Trac
 |-----|---------|
 | **Sonarr** | Series count, queue, missing episodes, disk usage |
 | **Radarr** | Movie count, queue, missing movies, disk usage |
+| **Lidarr** | Artist count, queue, missing albums, disk usage |
 | **Prowlarr** | Indexer count, failed indexers |
 | **Bazarr** | Missing subtitles (TV + movies) |
 | **Plex** | Libraries, active streams |
 | **Jellyfin** | Libraries, active sessions, update status |
 | **Immich** | Photos, videos, storage used |
 | **Overseerr** | Pending requests, requested, available, partially available |
+| **Huntarr** | Response time |
 | **Pinchflat** | Response time |
 | **qBittorrent** | Download/upload speed, active downloads |
 
 ## Quick Start (Docker)
 
 ```bash
-# Generate an encryption key
-export ENCRYPTION_KEY=$(openssl rand -hex 32)
-
-# Start the container
 docker compose up -d
 ```
 
-Open [http://localhost:3000](http://localhost:3000) and go to **Settings** to add your apps.
+An encryption key is automatically generated on first run and persisted in the data volume. To provide your own key instead, set the `ENCRYPTION_KEY` environment variable before starting:
+
+```bash
+# Optional: use your own key
+export ENCRYPTION_KEY=$(openssl rand -hex 32)
+docker compose up -d
+```
+
+Open [http://localhost:3026](http://localhost:3026) and go to **Settings** to add your apps.
 
 ## Manual Setup
 
@@ -55,7 +61,7 @@ npm start
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `ENCRYPTION_KEY` | Yes | 32-byte hex string for AES-256-GCM encryption of stored API keys and passwords. Generate with `openssl rand -hex 32`. |
+| `ENCRYPTION_KEY` | No (auto-generated) | 32-byte hex string for AES-256-GCM encryption of stored API keys and passwords. Auto-generated and persisted on first Docker run. To generate manually: `openssl rand -hex 32`. |
 
 ## Config Export / Import
 

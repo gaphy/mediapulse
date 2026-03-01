@@ -24,11 +24,13 @@ import type { AppStatus } from "@/types/app-status";
 import {
   Tv,
   Film,
+  Music,
   Search,
   Subtitles,
   MonitorPlay,
   Image,
   Bell,
+  Crosshair,
   Youtube,
   Download,
   Server,
@@ -40,12 +42,14 @@ import {
 const appIcons: Record<AppType, React.ComponentType<{ className?: string }>> = {
   sonarr: Tv,
   radarr: Film,
+  lidarr: Music,
   prowlarr: Search,
   bazarr: Subtitles,
   plex: MonitorPlay,
   jellyfin: Server,
   immich: Image,
   overseerr: Bell,
+  huntarr: Crosshair,
   pinchflat: Youtube,
   qbittorrent: Download,
 };
@@ -67,6 +71,12 @@ const metricDefs: Record<AppType, MetricDef[]> = {
     { key: "movieCount", label: "Movies" },
     { key: "queueSize", label: "Queue" },
     { key: "missingMovies", label: "Missing Movies" },
+    { key: "sizeOnDisk", label: "Size on Disk", format: "bytes" },
+  ],
+  lidarr: [
+    { key: "artistCount", label: "Artists" },
+    { key: "queueSize", label: "Queue" },
+    { key: "missingAlbums", label: "Missing Albums" },
     { key: "sizeOnDisk", label: "Size on Disk", format: "bytes" },
   ],
   prowlarr: [
@@ -96,6 +106,9 @@ const metricDefs: Record<AppType, MetricDef[]> = {
     { key: "requestedMedia", label: "Requested" },
     { key: "availableMedia", label: "Available" },
     { key: "partialMedia", label: "Partially Available" },
+  ],
+  huntarr: [
+    { key: "responseTimeMs", label: "Response", format: "ms" },
   ],
   pinchflat: [
     { key: "responseTimeMs", label: "Response", format: "ms" },

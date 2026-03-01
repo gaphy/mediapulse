@@ -1,12 +1,14 @@
 export const APP_TYPES = [
   "sonarr",
   "radarr",
+  "lidarr",
   "prowlarr",
   "bazarr",
   "plex",
   "jellyfin",
   "immich",
   "overseerr",
+  "huntarr",
   "pinchflat",
   "qbittorrent",
 ] as const;
@@ -41,12 +43,14 @@ export interface AppConfigPublic {
 export const APP_LABELS: Record<AppType, string> = {
   sonarr: "Sonarr",
   radarr: "Radarr",
+  lidarr: "Lidarr",
   prowlarr: "Prowlarr",
   bazarr: "Bazarr",
   plex: "Plex",
   jellyfin: "Jellyfin",
   immich: "Immich",
   overseerr: "Overseerr",
+  huntarr: "Huntarr",
   pinchflat: "Pinchflat",
   qbittorrent: "qBittorrent",
 };
@@ -57,12 +61,14 @@ export const APP_AUTH_TYPE: Record<
 > = {
   sonarr: "apiKey",
   radarr: "apiKey",
+  lidarr: "apiKey",
   prowlarr: "apiKey",
   bazarr: "apiKey",
   plex: "oauth",
   jellyfin: "apiKey",
   immich: "apiKey",
   overseerr: "apiKey",
+  huntarr: "credentials",
   pinchflat: "none",
   qbittorrent: "credentials",
 };

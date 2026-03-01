@@ -33,9 +33,15 @@ COPY --from=deps /app/node_modules/better-sqlite3 ./node_modules/better-sqlite3
 COPY --from=deps /app/node_modules/bindings ./node_modules/bindings
 COPY --from=deps /app/node_modules/file-uri-to-path ./node_modules/file-uri-to-path
 
+COPY --chown=nextjs:nodejs entrypoint.sh ./
 RUN mkdir -p /app/data && chown nextjs:nodejs /app/data
 
-USER nextjs
+RUN apk add --no-cache su-exec
+
 EXPOSE 3026
 
+LABEL org.opencontainers.image.title="MediaPulse"
+LABEL org.opencontainers.image.description="Dashboard for monitoring your media server apps"
+
+ENTRYPOINT ["./entrypoint.sh"]
 CMD ["node", "server.js"]

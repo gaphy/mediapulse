@@ -1,12 +1,14 @@
 services:
   mediapulse:
+    image: altrest/mediapulse:latest
     build: .
+    container_name: mediapulse
     ports:
       - "3026:3026"
     volumes:
       - mediapulse-data:/app/data
     environment:
-      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY:-}
     restart: unless-stopped
 
 volumes:

@@ -10,16 +10,20 @@ import { ImmichService } from "./immich";
 import { OverseerrService } from "./overseerr";
 import { PinchflatService } from "./pinchflat";
 import { QBittorrentService } from "./qbittorrent";
+import { LidarrService } from "./lidarr";
+import { HuntarrService } from "./huntarr";
 
 const services: Record<AppType, BaseAppService> = {
   sonarr: new SonarrService(),
   radarr: new RadarrService(),
+  lidarr: new LidarrService(),
   prowlarr: new ProwlarrService(),
   bazarr: new BazarrService(),
   plex: new PlexService(),
   jellyfin: new JellyfinService(),
   immich: new ImmichService(),
   overseerr: new OverseerrService(),
+  huntarr: new HuntarrService(),
   pinchflat: new PinchflatService(),
   qbittorrent: new QBittorrentService(),
 };
