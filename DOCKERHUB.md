@@ -74,11 +74,22 @@ Open [http://localhost:3026](http://localhost:3026) and go to **Settings** to ad
 ## Features
 
 - Single-page dashboard with 30-second auto-refresh
+- **Notifications** when services go offline or come back online (Telegram, Discord, Webhook)
 - AES-256-GCM encryption for API keys and passwords at rest
 - Config export/import for backup and migration
 - Dark/light theme support
 - Multi-arch image (amd64 + arm64)
 - All API calls happen server-side (credentials never reach the browser)
+
+## Notifications
+
+Get alerted when your services go offline or come back online. Configure in **Settings → Notifications**.
+
+| Channel | Setup |
+|---------|-------|
+| **Telegram** | Create a bot via [@BotFather](https://t.me/BotFather), message your bot to initiate contact, get your Chat ID from [@userinfobot](https://t.me/userinfobot) |
+| **Discord** | Create a webhook in Server Settings → Integrations → Webhooks |
+| **Webhook** | Any HTTP endpoint accepting POST/GET with JSON payload |
 
 ## Architecture
 

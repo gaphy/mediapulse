@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getEnabledApps } from "@/lib/db";
 import { getService } from "@/lib/services";
+import { checkAndNotify } from "@/lib/notifications";
 import type { AppStatus } from "@/types/app-status";
 
 export const dynamic = "force-dynamic";
@@ -34,6 +35,11 @@ export async function GET() {
           : "Unknown error",
       ],
     };
+  });
+
+  // Check for status transitions and send notifications (fire and forget)
+  checkAndNotify(statuses).catch((err) => {
+    console.error("Failed to check/send notifications:", err);
   });
 
   return NextResponse.json(statuses);

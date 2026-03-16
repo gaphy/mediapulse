@@ -69,6 +69,25 @@ You can export and import your app configuration from the **Settings** page usin
 
 This is useful for backing up your configuration or migrating to a new installation.
 
+## Notifications
+
+Get notified when your services go offline or come back online. Configure notifications in **Settings** under the Notifications section.
+
+### Supported Channels
+
+| Channel | Setup |
+|---------|-------|
+| **Telegram** | Create a bot via [@BotFather](https://t.me/BotFather), get the bot token, then message your bot to initiate contact. Get your Chat ID from [@userinfobot](https://t.me/userinfobot). |
+| **Discord** | Create a webhook in Server Settings → Integrations → Webhooks, then copy the webhook URL. |
+| **Webhook** | Any HTTP endpoint that accepts POST or GET requests with JSON payload. |
+
+### Notification Events
+
+- **Service Offline**: Triggered when a service transitions from online/degraded to offline
+- **Service Online**: Triggered when a service comes back online from offline state
+
+Notifications are checked on each status poll (every 30 seconds).
+
 ## Architecture
 
 - **Next.js 15** (App Router) with React 19 and TypeScript

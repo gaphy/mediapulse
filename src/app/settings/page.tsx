@@ -1,6 +1,8 @@
 "use client";
 
 import { AppList } from "@/components/settings/app-list";
+import { NotificationList } from "@/components/settings/notification-list";
+import { Separator } from "@/components/ui/separator";
 
 export default function SettingsPage() {
   return (
@@ -12,6 +14,8 @@ export default function SettingsPage() {
         </p>
       </div>
       <AppList />
+      <Separator />
+      <NotificationList />
     </div>
   );
 }
